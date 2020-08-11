@@ -11,10 +11,11 @@
 <ul>
 {% for i in data %}
 
-    <li><a href="{% url 'Show' id=i.id %}">{{i.task}}</a>
     {% if i.done == False %}
+    <li><a href="{% url 'Show' id=i.id %}">{{i.task}}</a>
     <input type="checkbox" id="done" onchange="location.href='{% url 'Change' itemid=i.id change=i.done %}'">
     {% else %}
+        <li><a href="{% url 'Show' id=i.id %}"><del>{{i.task}}</del></a>
     <input type="checkbox" checked="True" id="done" onchange="location.href='{% url 'Change' itemid=i.id change=i.done %}'">
     {% endif %}
         </li>
