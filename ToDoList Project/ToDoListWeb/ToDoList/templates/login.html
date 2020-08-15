@@ -3,23 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+
+        form{
+        text-align: center;
+        color: BlueViolet;
+        }
+
+        a{
+        color: DarkSlateBlue;
+        }
+
+        .layout{
+        background: Teal;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .lfborder{
+        position: fixed;
+        background: Aqua;
+        padding: 10px 15px;
+        border-radius: 15px;
+        }
+
+        .btn{
+        background: Silver;
+        color: DarkSlateGrey;
+        border-radius: 15px;
+        }
+
+        .field{
+        border-radius: 15px;
+        padding: 5px;
+        }
+
+    </style>
 </head>
 <body>
-<form method="post">
-    {% csrf_token %}
-Username: <input placeholder="username" name="username"><br><br>
-Password: <input placeholder="password" name="password" type="password"><br><br>
-<input type="submit" value="Login">
-<span style="font-size:13px;">Don't have an account, <a href="{% url 'register' %}">Register</a> here</span>
-</form>
 
-{% for i in messages %}
+<div class="layout">
+    <div class="lfborder">
+        <form method="post">
+            {% csrf_token %}
+            Username: <input class="field" placeholder="Username" name="username" autofocus="" required=""><br><br>
+            Password: <input class="field" placeholder="Password" name="password" type="password" required=""><br><br>
+            <input class='btn' type="submit" value="Login"><br>
+            <span style="font-size:15px;">Don't have an account, <a href="{% url 'register' %}">Register</a> here</span>
 
-<p id="messages">
-    {{i}}
-</p>
+        </form>
+        {% for i in messages %}
 
-{% endfor %}
+            <p id="messages">
+                {{i}}
+            </p>
+
+        {% endfor %}
+    </div>
+</div>
 
 </body>
 </html>

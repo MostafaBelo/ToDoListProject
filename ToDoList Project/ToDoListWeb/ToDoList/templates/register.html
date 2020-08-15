@@ -3,24 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
+    <style>
+        form{
+        color: BlueViolet;
+        vertical-align: middle;
+        }
+
+        a{
+        color: DarkSlateBlue;
+        }
+
+        .layout{
+        background: Teal;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .rfborder{
+        position: fixed;
+        background: Aqua;
+        padding: 10px 15px;
+        border-radius: 15px;
+        }
+
+        .btn{
+        background: Silver;
+        color: DarkSlateGrey;
+        border-radius: 15px;
+        }
+
+        .field{
+        border-radius: 15px;
+        padding: 5px;
+        float: right;
+        }
+    </style>
 </head>
 <body>
-<form method="post">
-    {% csrf_token %}
-    {% for i in form %}
-    <p>
-        {{i.label}}: {{i}}
-    </p>
-    {% endfor %}
-    <input type="submit" value="Register">
-    <spans style="font-size:13px;">Already have an account, <a href="{% url 'login' %}">Login</a> here</spans>
-</form>
 
-{% for i in messages %}
-{{i}}
-{% endfor %}
+<div class="layout">
+    <div class="rfborder">
+        <form method="post">
+            {% csrf_token %}
+            Username: <input class="field" placeholder="Username" type="text" name="username" required="" id="id_username" autofocus="" maxlength="150"><br><br>
+            Email Address: <input class="field" placeholder="Email Address" type="email" name="email" id="id_email" maxlength="254"><br><br>
+            Password: <input class="field" placeholder="Password" type="password" name="password1" required="" id="id_password1"><br><br>
+            Confirm Password:&nbsp;&nbsp;&nbsp;&nbsp; <input class="field" placeholder="Confirm Password" type="password" name="password2" required="" id="id_password2"><br><br>
+            <div style="text-align: center;">
+            <input class="btn" type="submit" value="Register"><br>
+            <span style="font-size:13px;">Already have an account, <a href="{% url 'login' %}">Login</a> here</span>
+            </div>
+        </form>
+        {% for i in messages %}
+        {{i}}
+        {% endfor %}
 
-{{form.errors}}
+        {{form.errors}}
+    </div>
+</div>
 
 </body>
 </html>

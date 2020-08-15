@@ -3,23 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>{{data.task}}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+
+        .layout{
+        background: Teal;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .window{
+        text-align: center;
+        color: BlueViolet;
+        }
+
+        .vfborder{
+        position: fixed;
+        background: Aqua;
+        padding: 10px 15px;
+        border-radius: 15px;
+        }
+
+        .btn{
+        background: Lime;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        position: relative;
+        }
+
+        i{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        }
+
+    </style>
 </head>
 <body>
-<p>
-Task: {{data.task}}<br>
-Done:
-{% if data.done == True %}
-    <input type="checkbox" checked="True" id="done" onchange="location.href='{% url 'Change' itemid=data.id change=data.done %}'">
-{% else %}
-    <input type="checkbox" id="done" onchange="location.href='{% url 'Change' itemid=data.id change=data.done %}'">
-{% endif %}
-<br>Due Date: {{data.duedate}}<br>
-Task required from: {{data.person}}<br>
-</p>
-<button onclick="location.href='{% url 'Edit' itemid=data.id %}'">Edit</button>
-<button onclick="location.href='{% url 'RemoveIt' itemid=data.id %}'">Remove</button>
-
-{% csrf_token %}
+<div class="layout">
+    <div class="vfborder">
+        <div class="window">
+            Task: {{data.task}}<br><br>
+            Done:
+            {% if data.done == True %}
+                <input type="checkbox" checked="True" id="done" onchange="location.href='{% url 'Change' itemid=data.id change=data.done %}'">
+            {% else %}
+                <input type="checkbox" id="done" onchange="location.href='{% url 'Change' itemid=data.id change=data.done %}'">
+            {% endif %}
+            <br><br>Due Date: {{data.duedate}}<br><br>
+            Task required from: {{data.person}}<br><br>
+        </div>
+        <div style="text-align: center;">
+            <button class="btn" onclick="location.href='{% url 'Edit' itemid=data.id %}'"><i class="material-icons">edit</i></button>
+            <button class="btn" onclick="location.href='{% url 'RemoveIt' itemid=data.id %}'"><i class="material-icons">delete</i></button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

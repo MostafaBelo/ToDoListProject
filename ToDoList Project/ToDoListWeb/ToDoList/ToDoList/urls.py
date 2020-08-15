@@ -22,6 +22,7 @@ urlpatterns = [
     path('clearall/', views.clearall, name='Clear'),
     path('changed/<int:itemid>/<str:change>>', views.changed, name='Change'),
     # path('main2/', views.main2, name='new_main'),
+    # path('main3/', views.home3, name='newer_main'),
     #api
     path('api_show/', views.api_show, name='API_Show'),
     path('api_update/', views.api_update, name='API_Update'),

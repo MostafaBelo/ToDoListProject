@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Editing</title>
+    <style>
+        .layout{
+        background: Teal;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .afborder{
+        position: fixed;
+        background: Aqua;
+        padding: 10px 15px;
+        border-radius: 15px;
+        }
+
+        .field{
+        border-radius: 15px;
+        padding: 5px;
+        float: right;
+        }
+
+        .btn{
+        background: Silver;
+        color: DarkSlateGrey;
+        border-radius: 15px;
+        }
+    </style>
 </head>
 <body>
+<div class="layout">
+    <div class="afborder">
+        <form action="{% url 'EditIt' itemid=itemid %}" method="post">
+            {% csrf_token %}
+            Task: <input class="field" value="{{form.task.value}}" placeholder="Task Name" type="text" name="task" required="" maxlength="100" id="id_task">
+            <br><br>
+            DueDate:&nbsp;&nbsp;&nbsp;&nbsp; {{form.duedate}}
+            <br><br>Person: <input class="field" value="{{form.person.value}}" placeholder="Task Required from" type="text" name="person" required="" maxlength="20" id="id_person">
+            <br><br>
+            <div style="text-align: center;">
+                <input class="btn" type="submit" value="Cahnge">
+            </div>
+        </form>
+    </div>
+</div>
 
-<form action="{% url 'EditIt' itemid=itemid %}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Change">
-</form>
+<script>
+    let day = document.getElementById('id_duedate_day');
+    let month = document.getElementById('id_duedate_month');
+    let year = document.getElementById('id_duedate_year');
+
+    day.style = 'padding: 5px; float:right; border-radius: 0px;';
+    month.style = 'padding: 5px; float:right; border-top-right-radius: 15px; border-bottom-right-radius: 15px;';
+    year.style = 'padding: 5px; float:right; border-top-left-radius: 15px; border-bottom-left-radius: 15px;';
+</script>
 
 </body>
 </html>

@@ -1,27 +1,98 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <style>
+
+        .header{
+        padding: 2px;
+        padding-right: 5px;
+        background: DarkSlateGrey;
+        text-align: right;
+        color: white
+        }
+        .vmenu{
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        }
+
+        .fab{
+        background: DodgerBlue;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 8px;
+        }
+
+        .tol{
+        text-align: center;
+        font-size: 24px;
+        }
+
+        .tli{
+        color: WhiteSmoke;
+        }
+
+        a{
+        color: WhiteSmoke;
+        text-decoration: none;
+        }
+    </style>
 </head>
-<body>
-<a href="{% url 'logout' %}">Logout</a><br><br>
-<button onclick="location.href={% url 'Add' %}">Add</button>
-<button onclick="location.href={% url 'Clear' %}">Clear All</button>
-<ul>
-{% for i in data %}
+<body style="background: Teal; margin: 0px;">
 
-    {% if i.done == False %}
-    <li><a href="{% url 'Show' id=i.id %}">{{i.task}}</a>
-    <input type="checkbox" id="done" onchange="location.href='{% url 'Change' itemid=i.id change=i.done %}'">
-    {% else %}
-        <li><a href="{% url 'Show' id=i.id %}"><del>{{i.task}}</del></a>
-    <input type="checkbox" checked="True" id="done" onchange="location.href='{% url 'Change' itemid=i.id change=i.done %}'">
-    {% endif %}
-        </li>
+<div class="header">Hello, {{cuser}}</div>
 
-{% endfor %}
-</p>
+<h1 style="font-family: 'Aclonica'; text-align: center; color: mediumspringgreen; text-decoration: underline;">To Do List</h1>
+<ol class="tol">
+    {% for i in data %}
+        {% if i.done == False %}
+            <li class="tli"><a href="{% url 'Show' id=i.id %}">{{i.task}}</a></li>
+        {% else %}
+            <li class="tli"><span style="text-decoration: line-through; color: Black;"><a href="{% url 'Show' id=i.id %}">{{i.task}}</a></span></li>
+        {% endif %}
+    {% endfor %}
+</ol>
+
+<div class="vmenu">
+    <div class="fab" id="btn_out" style="display: none;"><i class="material-icons">logout</i></div>
+    <div class="fab" id="btn_del" style="display: none;" onclick="location.href={% url 'Clear' %}"><i class="material-icons">delete</i></div>
+    <div class="fab" id="btn_add" style="display: none;" onclick="location.href={% url 'Add' %}"><i class="material-icons">add</i></div>
+    <div class="fab" id="btn_menu"><i class="material-icons">menu</i></div>
+</div>
+
+
+<script>
+    let btn_menu = document.getElementById('btn_menu');
+    let btn_out = document.getElementById('btn_out');
+    let btn_add = document.getElementById('btn_add');
+    let btn_del = document.getElementById('btn_del');
+
+    btn_menu.onclick = togglemenu;
+    function togglemenu() {
+        if (btn_add.style.display == 'none') {
+            btn_add.style.display = 'flex';
+            btn_del.style.display = 'flex';
+            btn_out.style.display = 'flex';
+        }
+        else {
+        btn_add.style.display = 'none';
+        btn_del.style.display = 'none';
+        btn_out.style.display = 'none';
+        }
+    }
+
+    btn_out.onclick = logmeout;
+    function logmeout() {
+    window.location.href = '{% url 'logout' %}';
+    }
+</script>
 
 </body>
 </html>

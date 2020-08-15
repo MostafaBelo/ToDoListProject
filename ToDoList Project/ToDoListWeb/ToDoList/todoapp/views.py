@@ -23,7 +23,7 @@ from django.contrib import messages
 
 # def main2(request):
 #     cont = {'data': data.objects.all()}
-#     return render(request, 'new_main.html', cont)
+#     return render(request, 'home2.html', cont)
 
 @unauth_user
 def login_view(request):
@@ -53,7 +53,6 @@ def register_view(request):
         if form.is_valid():
             usered = form.save()
 
-            messages.success(request, 'Account successfully created for ' + form.cleaned_data.get('username'))
             user = authenticate(username=form.cleaned_data.get('username'), password=form.cleaned_data.get('password1'))
 
             if user is not None:
@@ -65,9 +64,7 @@ def register_view(request):
 
 @login_required(login_url='login')
 def main(request):
-
-
-    cont = {'data':data.objects.filter(task_user=request.user.id)}
+    cont = {'data':data.objects.filter(task_user=request.user.id), 'cuser': request.user.username}
     return render(request, 'main.html', cont)
 
 # @login_required(login_url='login')
@@ -86,7 +83,7 @@ def viewtask(request, id):
 @login_required(login_url='login')
 def add(request):
     cont = {'form':aeForm}
-    return render(request, 'add_edit.html', cont)
+    return render(request, 'add.html', cont)
 
 @login_required(login_url='login')
 def addit(request):
@@ -138,7 +135,7 @@ def removeit(request, itemid):
 
     return redirect('Main')
 
-@login_required()
+@login_required(login_url='login')
 def clearall(request):
     items = data.objects.filter(task_user=request.user.id)
     items.delete()
