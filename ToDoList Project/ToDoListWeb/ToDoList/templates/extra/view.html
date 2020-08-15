@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{data.task}}</title>
+</head>
+<body>
+<p>
+Task: {{data.task}}<br>
+Done:
+{% if data.done == True %}
+    <input type="checkbox" checked="True" id="done" onchange="location.href='{% url 'Change' itemid=data.id change=data.done %}'">
+{% else %}
+    <input type="checkbox" id="done" onchange="location.href='{% url 'Change' itemid=data.id change=data.done %}'">
+{% endif %}
+<br>Due Date: {{data.duedate}}<br>
+Task required from: {{data.person}}<br>
+</p>
+<button onclick="location.href='{% url 'Edit' itemid=data.id %}'">Edit</button>
+<button onclick="location.href='{% url 'RemoveIt' itemid=data.id %}'">Remove</button>
+
+</body>
+</html>

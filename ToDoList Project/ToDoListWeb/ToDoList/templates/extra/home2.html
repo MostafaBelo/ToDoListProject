@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html  >
+<head>
+  <!-- Site made with Mobirise Website Builder v4.12.4, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.12.4, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="/static/todoapp/assets/images/logo4.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>Home</title>
+  <link rel="stylesheet" href="/static/todoapp/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/todoapp/assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="/static/todoapp/assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="/static/todoapp/assets/tether/tether.min.css">
+  <link rel="stylesheet" href="/static/todoapp/assets/theme/css/style.css">
+  <link rel="preload" as="style" href="/static/todoapp/assets/mobirise/css/mbr-additional.css">
+  <link rel="stylesheet" href="/static/todoapp/assets/mobirise/css/mbr-additional.css" type="text/css">
+  
+  
+  
+</head>
+<body>
+  <section class="mbr-section content8 cid-s7EjpLd9mV" id="content8-b">
+
+    
+
+    <div class="container">
+        <div class="media-container-row title">
+            <div class="col-12 col-md-8">
+                <div class="mbr-section-btn align-center"><a class="btn btn-primary display-4" href="{%  url 'Main' %}">Add Task</a>
+                    <a class="btn btn-black-outline display-4" href="{% url 'Main' %}">Clear ALL<br></a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="engine"><a href="https://mobirise.info/t">amp templates</a></section><section class="mbr-section article content11 cid-s7EjfQibKv" id="content11-a">
+     
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
+                <ol>
+
+
+                    {% for i in data %}
+
+                    {% if i.done == False %}
+                        <li><strong>{{i.task}}</strong> - {{i.person}}&nbsp;({{i.duedate}}) <input type="checkbox" id="done" onchange="location.href='{% url 'Change' itemid=i.id change=i.done %}'"></li>
+                    {% else %}
+                        <li><del><strong>{{i.task}}</strong></del> - {{i.person}}&nbsp;({{i.duedate}}) <input type="checkbox" checked="True" id="done" onchange="location.href='{% url 'Change' itemid=i.id change=i.done %}'"></li>
+                    {% endif %}
+
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <script src="/static/todoapp/assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="/static/todoapp/assets/popper/popper.min.js"></script>
+  <script src="/static/todoapp/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/static/todoapp/assets/tether/tether.min.js"></script>
+  <script src="/static/todoapp/assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="/static/todoapp/assets/theme/js/script.js"></script>
+  
+  
+</body>
+</html>

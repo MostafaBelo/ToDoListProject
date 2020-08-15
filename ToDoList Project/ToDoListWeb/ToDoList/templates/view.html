@@ -30,12 +30,58 @@
         border-radius: 15px;
         }
 
+        .fab{
+        position: relative;
+        background: Lime;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 8px;
+        cursor: pointer;
+        }
+
         .btn{
         background: Lime;
         border-radius: 15px;
         width: 30px;
         height: 30px;
         position: relative;
+        cursor: pointer;
+        }
+
+        .btn:hover .tooltiptext{
+        opacity: 1;
+        }
+
+        .tooltiptext{
+        opacity: 0;
+        width: 60px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: 130%;
+        left: 50%;
+        margin-left: -30px;
+        font-size: 15px;
+        transition: opacity .25s;
+        }
+
+        .btn .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        bottom: 100%;  /* At the top of the tooltip */
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent black transparent;
         }
 
         i{
@@ -51,6 +97,7 @@
 <div class="layout">
     <div class="vfborder">
         <div class="window">
+            <div class="fab" onclick="location.href='{% url 'Main' %}'"><i class="material-icons">chevron_left</i></div>
             Task: {{data.task}}<br><br>
             Done:
             {% if data.done == True %}
@@ -62,8 +109,8 @@
             Task required from: {{data.person}}<br><br>
         </div>
         <div style="text-align: center;">
-            <button class="btn" onclick="location.href='{% url 'Edit' itemid=data.id %}'"><i class="material-icons">edit</i></button>
-            <button class="btn" onclick="location.href='{% url 'RemoveIt' itemid=data.id %}'"><i class="material-icons">delete</i></button>
+            <button class="btn" onclick="location.href='{% url 'Edit' itemid=data.id %}'"><i class="material-icons">edit</i><span class="tooltiptext">Edit</span></button>
+            <button class="btn" onclick="location.href='{% url 'RemoveIt' itemid=data.id %}'"><i class="material-icons">delete</i><span class="tooltiptext">Delete</span></button>
         </div>
     </div>
 </div>

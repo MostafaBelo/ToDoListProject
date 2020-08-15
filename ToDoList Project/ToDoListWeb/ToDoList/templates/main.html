@@ -6,6 +6,10 @@
     <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
     <style>
 
+        #check{
+        display: none;
+        }
+
         .header{
         padding: 2px;
         padding-right: 5px;
@@ -19,7 +23,15 @@
         right: 16px;
         }
 
+        .submenu{
+        position: relative;
+        right: -146px;
+        z-index: -1;
+        transition: all .25s ease;
+        }
+
         .fab{
+        position: relative;
         background: DodgerBlue;
         border-radius: 15px;
         width: 30px;
@@ -28,6 +40,38 @@
         justify-content: center;
         align-items: center;
         margin-top: 8px;
+        cursor: pointer;
+        transition: .4s;
+        }
+
+        .fab:hover .tooltiptext{
+        opacity: 1;
+        }
+
+        .tooltiptext{
+        opacity: 0;
+        width: 60px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        right: 125%;
+        font-size: 15px;
+        transition: opacity .25s;
+        }
+
+        .fab .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent black;
         }
 
         .tol{
@@ -42,6 +86,14 @@
         a{
         color: WhiteSmoke;
         text-decoration: none;
+        }
+
+        .fab:hover {
+        background: #0070ff;
+        }
+
+        #check:checked ~ .submenu{
+        right: 0;
         }
     </style>
 </head>
@@ -61,32 +113,31 @@
 </ol>
 
 <div class="vmenu">
-    <div class="fab" id="btn_out" style="display: none;"><i class="material-icons">logout</i></div>
-    <div class="fab" id="btn_del" style="display: none;" onclick="location.href={% url 'Clear' %}"><i class="material-icons">delete</i></div>
-    <div class="fab" id="btn_add" style="display: none;" onclick="location.href={% url 'Add' %}"><i class="material-icons">add</i></div>
-    <div class="fab" id="btn_menu"><i class="material-icons">menu</i></div>
+    <input type="checkbox" id="check">
+    <div class="submenu" id="menu">
+        <div class="fab" id="btn_out"><i class="material-icons">logout</i><span class="tooltiptext">Logout</span></div>
+        <div class="fab" id="btn_del" onclick="location.href={% url 'Clear' %}"><i class="material-icons">delete_forever</i><span class="tooltiptext">Clear All</span></div>
+        <div class="fab" id="btn_add" onclick="location.href={% url 'Add' %}"><i class="material-icons">add</i><span class="tooltiptext">Add</span></div>
+    </div>
+    <label for="check">
+        <div class="fab" id="btn_menu"><i class="material-icons">menu</i></div>
+    </label>
 </div>
 
 
 <script>
     let btn_menu = document.getElementById('btn_menu');
-    let btn_out = document.getElementById('btn_out');
-    let btn_add = document.getElementById('btn_add');
-    let btn_del = document.getElementById('btn_del');
+    let menu = document.getElementById('menu');
 
-    btn_menu.onclick = togglemenu;
-    function togglemenu() {
-        if (btn_add.style.display == 'none') {
-            btn_add.style.display = 'flex';
-            btn_del.style.display = 'flex';
-            btn_out.style.display = 'flex';
-        }
-        else {
-        btn_add.style.display = 'none';
-        btn_del.style.display = 'none';
-        btn_out.style.display = 'none';
-        }
-    }
+<!--    btn_menu.onclick = togglemenu;-->
+<!--    function togglemenu() {-->
+<!--        if (menu.style.display == 'none') {-->
+<!--            menu.style.display = 'block';-->
+<!--        }-->
+<!--        else {-->
+<!--        menu.style.display = 'none';-->
+<!--        }-->
+<!--    }-->
 
     btn_out.onclick = logmeout;
     function logmeout() {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding</title>
+    <style>
+        .layout{
+        background: Teal;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .afborder{
+        position: fixed;
+        background: Aqua;
+        padding: 10px 15px;
+        border-radius: 15px;
+        }
+
+        .field{
+        border-radius: 15px;
+        padding: 5px;
+        float: right;
+        }
+
+        .btn{
+        background: Silver;
+        color: DarkSlateGrey;
+        border-radius: 15px;
+        cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <div class="afborder">
+        <form action="{% url 'AddIt' %}" method="post">
+            {% csrf_token %}
+            Task: <input class="field" placeholder="Task Name" type="text" name="task" required="" maxlength="100" id="id_task">
+            <br><br>DueDate:&nbsp;&nbsp;&nbsp;&nbsp; <select style="border-top-right-radius: 15px; border-bottom-right-radius: 15px; padding: 5px; float: right;" name="duedate_year" required="" id="id_duedate_year"><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select><select style="border-radius: 0px; padding: 5px; float: right;" name="duedate_day" required="" id="id_duedate_day"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select><select style="border-top-left-radius: 15px; border-bottom-left-radius: 15px; padding: 5px; float: right;" name="duedate_month" required="" id="id_duedate_month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>
+            <br><br>Person: <input class="field" placeholder="Task Required of" type="text" name="person" required="" maxlength="20" id="id_person">
+            <br><br>
+            <div style="text-align: center;">
+                <input class="btn" type="submit" value="Add">
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
